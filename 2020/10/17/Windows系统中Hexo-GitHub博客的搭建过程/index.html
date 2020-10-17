@@ -8,17 +8,19 @@
   <meta name="renderer" content="webkit">
 
   
-  <title>tags | Christopher&#39;s Blog</title>
+  <title>Windows系统中Hexo+GitHub博客的搭建过程 | Christopher&#39;s Blog</title>
 
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="Christopher's Blog" type="application/atom+xml">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://example.com/tags/index.html">
+  <meta name="description" content="一.首先需要安装两个程序    node.js：http:&#x2F;&#x2F;nodejs.cn&#x2F;download Git：http:&#x2F;&#x2F;nodejs.cn&#x2F;download&#x2F; *这里有一个可以用来确定软件&#x2F;模块是否正确安装的方法，就是输入一下获取版本号的指令,比如 npm -v 或者 node -v等。**     二. 然后就是关于cnpm的配置  大概就是因为npm贼慢贼卡，所以要配置一个叫做cnpm的东西">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows系统中Hexo+GitHub博客的搭建过程">
+<meta property="og:url" content="http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Christopher&#39;s Blog">
+<meta property="og:description" content="一.首先需要安装两个程序    node.js：http:&#x2F;&#x2F;nodejs.cn&#x2F;download Git：http:&#x2F;&#x2F;nodejs.cn&#x2F;download&#x2F; *这里有一个可以用来确定软件&#x2F;模块是否正确安装的方法，就是输入一下获取版本号的指令,比如 npm -v 或者 node -v等。**     二. 然后就是关于cnpm的配置  大概就是因为npm贼慢贼卡，所以要配置一个叫做cnpm的东西">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-13T15:55:12.000Z">
-<meta property="article:modified_time" content="2020-10-13T15:58:59.684Z">
+<meta property="article:published_time" content="2020-10-17T03:20:23.000Z">
+<meta property="article:modified_time" content="2020-10-17T03:22:41.434Z">
 <meta property="article:author" content="Christopher Li">
 <meta name="twitter:card" content="summary">
 
@@ -28,7 +30,7 @@
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="Christopher&#39;s Blog">
-  <meta name="msapplication-starturl" content="http://example.com/tags/">
+  <meta name="msapplication-starturl" content="http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/">
   <meta name="msapplication-navbutton-color" content="#9C27B0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Christopher&#39;s Blog">
@@ -36,7 +38,7 @@
   <link rel="apple-touch-icon" href="/images/favicon.png">
 
   
-    <link rel="canonical" href="http://example.com/tags/index.html">
+    <link rel="canonical" href="http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/">
   
 
   
@@ -166,11 +168,11 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-5.png" style="max-height: 240px;">
+      <img src="/images/random/material-14.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
-          <div class="mdui-card-primary-title">tags</div>
-          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2020-10-13 / <i class="iconfont">&#xe601;</i> Christopher Li</div>
+          <div class="mdui-card-primary-title">Windows系统中Hexo+GitHub博客的搭建过程</div>
+          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2020-10-17 / <i class="iconfont">&#xe601;</i> Christopher Li</div>
         </div>
       </div>
       <div class="mdui-card-menu">
@@ -182,7 +184,7 @@
             
             <li class="mdui-menu-item" disabled>
               
-                <img src="http://qr.liantu.com/api.php?w=246&m=10&text=http://example.com/tags/index.html">
+                <img src="http://qr.liantu.com/api.php?w=246&m=10&text=http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/">
               
             </li>
           </ul>
@@ -191,36 +193,75 @@
           <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
           <ul class="mdui-menu" id="share_menu">
             <li class="mdui-menu-item">
-              <a href="http://service.weibo.com/share/share.php?appkey=&title=tags&url=http://example.com/tags/index.html&pic=http://example.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=Windows系统中Hexo+GitHub博客的搭建过程&url=http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/&pic=http://example.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=tags&url=http://example.com/tags/index.html&via=Christopher Li" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+              <a href="https://twitter.com/intent/tweet?text=Windows系统中Hexo+GitHub博客的搭建过程&url=http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/&via=Christopher Li" target="_blank" class="mdui-ripple">分享到 Twitter</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/tags/index.html" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=http://example.com/tags/index.html" target="_blank" class="mdui-ripple">分享到 Google+</a>
+              <a href="https://plus.google.com/share?url=http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/" target="_blank" class="mdui-ripple">分享到 Google+</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/tags/index.html&title=tags" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/&title=Windows系统中Hexo+GitHub博客的搭建过程" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="http://connect.qq.com/widget/shareqq/index.html?site=Christopher&#39;s Blog&title=tags&pics=http://example.com/images/favicon.png&url=http://example.com/tags/index.html" target="_blank" class="mdui-ripple">分享到 QQ</a>
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=Christopher&#39;s Blog&title=Windows系统中Hexo+GitHub博客的搭建过程&pics=http://example.com/images/favicon.png&url=http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/" target="_blank" class="mdui-ripple">分享到 QQ</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=http://example.com/tags/index.html&text=tags" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+              <a href="https://telegram.me/share/url?url=http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/&text=Windows系统中Hexo+GitHub博客的搭建过程" target="_blank" class="mdui-ripple">分享到 Telegram</a>
             </li>
           </ul>
         
       </div>
     </header>
     <div class="mdui-card-content mdui-typo">
-      
+      <p><strong>一.首先需要安装两个程序</strong>  </p>
+<ul>
+<li>node.js：<a target="_blank" rel="noopener" href="http://nodejs.cn/download">http://nodejs.cn/download</a></li>
+<li>Git：<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">http://nodejs.cn/download/</a></li>
+<li>*<em>这里有一个可以用来确定软件/模块是否正确安装的方法，就是输入一下获取版本号的指令,比如<code> npm -v</code> 或者 <code>node -v</code>等。**</em>  </li>
+</ul>
+<hr>
+<p><strong>二. 然后就是关于cnpm的配置</strong></p>
+<ul>
+<li>大概就是因为npm贼慢贼卡，所以要配置一个叫做cnpm的东西，还要和淘宝链接，具体为啥是淘宝我也不知道，能用就行。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;http:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>三.安装Hexo</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>四.初始化一个博客</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog&#x2F;&#x2F;在名为blog的文件夹中初始化hexo博客，如果blog文件夹存在且不为空，则会报错</span><br><span class="line">hexo s&#x2F;&#x2F;启动本地服务器，一般用于预览博客效果，打开浏览器输入localhost:4000即可查看，启动之后可以按Ctrl+C来终止</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>五.创建一篇新博客</strong>  </p>
+<ul>
+<li>方法一：将一篇已经写好的<code>.md</code>文件放到<code>blog\source\_post</code>目录下。</li>
+<li>方法二：运行指令<code>hexo n &quot;&quot;</code>，其中文件名也就是博客的标题写在引号中间，该指令会在<code>blog\source\_post</code>目录下创建一个<code>.md</code>文件，然后编辑这个文件就可以了。</li>
+</ul>
+<hr>
+<p><strong>六.静态文件的清理与生成</strong></p>
+<ul>
+<li>每次对博客进行开动之后都要先清理再生成一遍静态文件，这个操作就好比是我们平常编辑一个文档之后要保存一样。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean&#x2F;&#x2F;清理静态文件</span><br><span class="line">hexo g&#x2F;&#x2F;生成静态文件</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p><strong>七.将博客部署到GitHub上</strong></p>
+<ol>
+<li>注册一个GitHub账号</li>
+<li>新建一个仓库，名称一定要是   <code>你的用户名.github.io</code></li>
+<li>回到cmd，安装插件   <code>cnpm install --save hexo-deployer-git</code></li>
+<li>编辑blog目录下的  <code>_config.yml </code>   :<br> 拉到文件最底下，找到这样一块，并按照下面的格式填写，注意冒号后面都有空格。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: &#39;git&#39;</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;你的用户名&#x2F;你的用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
+<li>回到cmd，输入部署指令<code>hexo d</code>然后按照提示输入GitHub的账号密码什么的就行了。</li>
+</ol>
+<h3 id="恭喜你，你的博客至此已经搭建成功，你可以在浏览器中输入网址https-你的用户名-github-io-来访问你的博客。"><a href="#恭喜你，你的博客至此已经搭建成功，你可以在浏览器中输入网址https-你的用户名-github-io-来访问你的博客。" class="headerlink" title="恭喜你，你的博客至此已经搭建成功，你可以在浏览器中输入网址https://你的用户名.github.io 来访问你的博客。"></a>恭喜你，你的博客至此已经搭建成功，你可以在浏览器中输入网址https://你的用户名.github.io 来访问你的博客。</h3>
       
       <blockquote>
         
-        <strong>本文链接：</strong><br><a href="http://example.com/tags/index.html">http://example.com/tags/index.html</a>
+        <strong>本文链接：</strong><br><a href="http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/">http://example.com/2020/10/17/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/</a>
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
@@ -235,6 +276,17 @@
 
   <script>$("#main article .mdui-card-content img.fancybox").on("click",function(e){$.fancybox.open({src:$(this).attr("src")});});</script>
 
+
+  <nav id="paginator">
+    
+    <div class="spacer"></div>
+    
+      <a rel="next" class="extend next" href="/2020/10/13/hello-world/">
+        <span class="mdui-p-x-3" mdui-tooltip="{content: 'Hello World'}">下一篇</span>
+        <button aria-label="next" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_forward</i></button>
+      </a>
+    
+  </nav>
 
 
 
