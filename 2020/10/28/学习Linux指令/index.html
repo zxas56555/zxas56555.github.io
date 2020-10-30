@@ -8,36 +8,21 @@
   <meta name="renderer" content="webkit">
 
   
-  <title>Kali的详细安装过程 | Christopher&#39;s Blog</title>
+  <title>学习Linux指令 | Christopher&#39;s Blog</title>
 
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="Christopher's Blog" type="application/atom+xml">
-  <meta name="description" content="准备：  电脑一台 VMware Workstation Pro 16   一、下载系统镜像文件  由于Kali官网下载镜像的速度十分的慢，所以直接在此附上Torrent 二、创建一个新的虚拟机 点击创建一个新的虚拟机。    自定义。    硬件兼容性选择16.x    安装程序光盘映像文件，并在”浏览“中选择下载好的映像文件。    操作系统选择Linux，版本选择Debian 7.x 64">
+  <meta name="description" content="学习Linux指令ls：显示当前操作目录下的文件及文件夹123# ls -l               &#x2F;&#x2F;详细列表显示# ls -a               &#x2F;&#x2F;显示隐藏文件# ls -h               &#x2F;&#x2F;输出文件大小的时候自动换算单位   注意，各参数可以合并使用，例如：  1# ls -lha  pwd：输出当">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kali的详细安装过程">
-<meta property="og:url" content="http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/index.html">
+<meta property="og:title" content="学习Linux指令">
+<meta property="og:url" content="http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/index.html">
 <meta property="og:site_name" content="Christopher&#39;s Blog">
-<meta property="og:description" content="准备：  电脑一台 VMware Workstation Pro 16   一、下载系统镜像文件  由于Kali官网下载镜像的速度十分的慢，所以直接在此附上Torrent 二、创建一个新的虚拟机 点击创建一个新的虚拟机。    自定义。    硬件兼容性选择16.x    安装程序光盘映像文件，并在”浏览“中选择下载好的映像文件。    操作系统选择Linux，版本选择Debian 7.x 64">
+<meta property="og:description" content="学习Linux指令ls：显示当前操作目录下的文件及文件夹123# ls -l               &#x2F;&#x2F;详细列表显示# ls -a               &#x2F;&#x2F;显示隐藏文件# ls -h               &#x2F;&#x2F;输出文件大小的时候自动换算单位   注意，各参数可以合并使用，例如：  1# ls -lha  pwd：输出当">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/2.1.jpg">
-<meta property="og:image" content="http://example.com/images/2.2.jpg">
-<meta property="og:image" content="http://example.com/images/2.3.jpg">
-<meta property="og:image" content="http://example.com/images/2.4.jpg">
-<meta property="og:image" content="http://example.com/images/2.5.jpg">
-<meta property="og:image" content="http://example.com/images/2.6.jpg">
-<meta property="og:image" content="http://example.com/images/2.8.jpg">
-<meta property="og:image" content="http://example.com/images/2.9.jpg">
-<meta property="og:image" content="http://example.com/images/3.1.jpg">
-<meta property="og:image" content="http://example.com/images/3.3.1.jpg">
-<meta property="og:image" content="http://example.com/images/3.3.2.jpg">
-<meta property="og:image" content="http://example.com/images/3.3.3.jpg">
-<meta property="og:image" content="http://example.com/images/3.4.jpg">
-<meta property="og:image" content="http://example.com/images/3.6.jpg">
-<meta property="article:published_time" content="2020-10-20T12:12:02.000Z">
-<meta property="article:modified_time" content="2020-10-24T11:35:24.228Z">
+<meta property="article:published_time" content="2020-10-28T08:22:25.000Z">
+<meta property="article:modified_time" content="2020-10-30T12:01:32.664Z">
 <meta property="article:author" content="Christopher Li">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/2.1.jpg">
 
   <meta name="keywords" content="">
   <meta name="format-detection" content="telephone=no,email=no">
@@ -45,7 +30,7 @@
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="Christopher&#39;s Blog">
-  <meta name="msapplication-starturl" content="http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">
+  <meta name="msapplication-starturl" content="http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/">
   <meta name="msapplication-navbutton-color" content="#9C27B0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Christopher&#39;s Blog">
@@ -53,7 +38,7 @@
   <link rel="apple-touch-icon" href="/images/favicon.png">
 
   
-    <link rel="canonical" href="http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">
+    <link rel="canonical" href="http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/">
   
 
   
@@ -183,11 +168,11 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-9.png" style="max-height: 240px;">
+      <img src="/images/random/material-4.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
-          <div class="mdui-card-primary-title">Kali的详细安装过程</div>
-          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2020-10-20 / <i class="iconfont">&#xe601;</i> Christopher Li</div>
+          <div class="mdui-card-primary-title">学习Linux指令</div>
+          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2020-10-28 / <i class="iconfont">&#xe601;</i> Christopher Li</div>
         </div>
       </div>
       <div class="mdui-card-menu">
@@ -199,7 +184,7 @@
             
             <li class="mdui-menu-item" disabled>
               
-                <img src="http://qr.liantu.com/api.php?w=246&m=10&text=http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">
+                <img src="http://qr.liantu.com/api.php?w=246&m=10&text=http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/">
               
             </li>
           </ul>
@@ -208,83 +193,65 @@
           <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
           <ul class="mdui-menu" id="share_menu">
             <li class="mdui-menu-item">
-              <a href="http://service.weibo.com/share/share.php?appkey=&title=Kali的详细安装过程&url=http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/&pic=http://example.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=学习Linux指令&url=http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/&pic=http://example.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=Kali的详细安装过程&url=http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/&via=Christopher Li" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+              <a href="https://twitter.com/intent/tweet?text=学习Linux指令&url=http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/&via=Christopher Li" target="_blank" class="mdui-ripple">分享到 Twitter</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+              <a href="https://plus.google.com/share?url=http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/" target="_blank" class="mdui-ripple">分享到 Google+</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/&title=Kali的详细安装过程" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/&title=学习Linux指令" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="http://connect.qq.com/widget/shareqq/index.html?site=Christopher&#39;s Blog&title=Kali的详细安装过程&pics=http://example.com/images/favicon.png&url=http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=Christopher&#39;s Blog&title=学习Linux指令&pics=http://example.com/images/favicon.png&url=http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/" target="_blank" class="mdui-ripple">分享到 QQ</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/&text=Kali的详细安装过程" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+              <a href="https://telegram.me/share/url?url=http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/&text=学习Linux指令" target="_blank" class="mdui-ripple">分享到 Telegram</a>
             </li>
           </ul>
         
       </div>
     </header>
     <div class="mdui-card-content mdui-typo">
-      <blockquote>
-<p>准备：</p>
-<ol>
-<li>电脑一台</li>
-<li>VMware Workstation Pro 16</li>
-</ol>
-</blockquote>
-<h1 id="一、下载系统镜像文件"><a href="#一、下载系统镜像文件" class="headerlink" title="一、下载系统镜像文件"></a>一、下载系统镜像文件</h1><p>  由于Kali官网下载镜像的速度十分的慢，所以直接在此附上<a target="_blank" rel="noopener" href="https://images.kali.org/kali-linux-2020.3-installer-amd64.iso.torrent">Torrent</a></p>
-<h1 id="二、创建一个新的虚拟机"><a href="#二、创建一个新的虚拟机" class="headerlink" title="二、创建一个新的虚拟机"></a>二、创建一个新的虚拟机</h1><ol>
-<li><p>点击创建一个新的虚拟机。<br><img src="/images/2.1.jpg">  </p>
-</li>
-<li><p>自定义。<br><img src="/images/2.2.jpg">  </p>
-</li>
-<li><p>硬件兼容性选择16.x<br><img src="/images/2.3.jpg">  </p>
-</li>
-<li><p>安装程序光盘映像文件，并在”浏览“中选择下载好的映像文件。<br><img src="/images/2.4.jpg">  </p>
-</li>
-<li><p>操作系统选择Linux，版本选择Debian 7.x 64位。<br><img src="/images/2.5.jpg">  </p>
-</li>
-<li><p>自定义一个虚拟机的名字，位置建议保存到非系统盘。<br><img src="/images/2.6.jpg">  </p>
-</li>
-<li><p>处理器数量看用途。  </p>
-</li>
-<li><p>内存量注意要 <strong>大于推荐内存小于最大推荐内存</strong>，具体量看你用途。<br><img src="/images/2.8.jpg">  </p>
-</li>
-<li><p>接下来的一系列配置保持默认即可，一直到指定磁盘大小，磁盘大小建议大于系统默认的大小，并选择<code>将虚拟磁盘储存位单个文件</code><br><img src="/images/2.9.jpg">  </p>
-</li>
-<li><p>接下来的一系列配置保持默认即可。  </p>
-</li>
-</ol>
-<h1 id="三、安装Kali"><a href="#三、安装Kali" class="headerlink" title="三、安装Kali"></a>三、安装Kali</h1><ol>
-<li><p>开启虚拟机，进入安装界面，选择图形界面安装（Graphical install）。<br><img src="/images/3.1.jpg">  </p>
-</li>
-<li><p>接下来进行选择语言，选择键盘语言，紧接着就是一系列自动配置，然后就输入主机名，域名，账户名和密码  </p>
-</li>
-</ol>
-<p>（别看了，这几步这么简单还想要配图？不存在的）</p>
-<ol start="3">
-<li><p>配置磁盘<br><img src="/images/3.3.1.jpg"><br><img src="/images/3.3.2.jpg"><br><img src="/images/3.3.3.jpg"></p>
-</li>
-<li><p>一波加载之后，这个请按需选择。<br><img src="/images/3.4.jpg">  </p>
-</li>
-<li><p>安装，GRUB启动引导器，记得选择第二个。<br><img src="/images/3.6.jpg">  </p>
-</li>
-<li><p>等待加载完毕即可使用。</p>
-</li>
-</ol>
+      <h1 id="学习Linux指令"><a href="#学习Linux指令" class="headerlink" title="学习Linux指令"></a>学习Linux指令</h1><h4 id="ls：显示当前操作目录下的文件及文件夹"><a href="#ls：显示当前操作目录下的文件及文件夹" class="headerlink" title="ls：显示当前操作目录下的文件及文件夹"></a>ls：显示当前操作目录下的文件及文件夹</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ls -l               &#x2F;&#x2F;详细列表显示</span><br><span class="line"># ls -a               &#x2F;&#x2F;显示隐藏文件</span><br><span class="line"># ls -h               &#x2F;&#x2F;输出文件大小的时候自动换算单位</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>注意，各参数可以合并使用，例如：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ls -lha</span><br></pre></td></tr></table></figure>
+
+<h4 id="pwd：输出当前操作目录"><a href="#pwd：输出当前操作目录" class="headerlink" title="pwd：输出当前操作目录"></a>pwd：输出当前操作目录</h4><h4 id="cd：切换操作目录"><a href="#cd：切换操作目录" class="headerlink" title="cd：切换操作目录"></a>cd：切换操作目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># cd 路径               &#x2F;&#x2F;切换到指定路径</span><br></pre></td></tr></table></figure>
+
+<h4 id="mkdir：创建目录"><a href="#mkdir：创建目录" class="headerlink" title="mkdir：创建目录"></a>mkdir：创建目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># mkdir 路径            &#x2F;&#x2F;只能创建一层新目录</span><br><span class="line"># mkdir -p 路径         &#x2F;&#x2F;一次性创建目录，目录里可以有多层新目录</span><br><span class="line"># mkdir 路径1 路径2 路径3&#x2F;&#x2F;一次性创建多个目录</span><br></pre></td></tr></table></figure>
+
+<h4 id="touch：创建文件"><a href="#touch：创建文件" class="headerlink" title="touch：创建文件"></a>touch：创建文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># touch example.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="cp：复制"><a href="#cp：复制" class="headerlink" title="cp：复制"></a>cp：复制</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># cp [-r] 路径1 路径2</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将路径一复制到路径二。</li>
+<li>其中路径一和二的名称可以不一样，用来复制的同时重命名。</li>
+<li>如果复制的是文件夹需要加上参数<code>-r</code>，表示递归复制。</li>
+</ul>
+<h4 id="mv：剪贴（移动）"><a href="#mv：剪贴（移动）" class="headerlink" title="mv：剪贴（移动）"></a>mv：剪贴（移动）</h4><ul>
+<li>语法规则同cp。</li>
+</ul>
+<h4 id="rm：删除"><a href="#rm：删除" class="headerlink" title="rm：删除"></a>rm：删除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># rm [-r] [-f] 文件路径           &#x2F;&#x2F;删除指定文件</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除文件的时候会给出提示”确定删除xxx文件吗“，如果不想要提示需要加上<code>-f</code>参数</li>
+<li>删除文件夹时需要加上<code>-r</code>参数。</li>
+</ul>
+<h4 id="cat：打开文件。"><a href="#cat：打开文件。" class="headerlink" title="cat：打开文件。"></a>cat：打开文件。</h4>
       
       <blockquote>
         
-        <strong>本文链接：</strong><br><a href="http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">http://example.com/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/</a>
+        <strong>本文链接：</strong><br><a href="http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/">http://example.com/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/</a>
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
@@ -302,15 +269,10 @@
 
   <nav id="paginator">
     
-      <a rel="prev" class="extend prev" href="/2020/10/28/%E5%AD%A6%E4%B9%A0Linux%E6%8C%87%E4%BB%A4/">
-        <button aria-label="prev" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_back</i></button>
-        <span class="mdui-p-x-3" mdui-tooltip="{content: '学习Linux指令'}">上一篇</span>
-      </a>
-    
     <div class="spacer"></div>
     
-      <a rel="next" class="extend next" href="/2020/10/20/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BVMware%20Workstation%20pro%E7%9A%84%E5%AE%89%E8%A3%85/">
-        <span class="mdui-p-x-3" mdui-tooltip="{content: '记录一下VMware Workstation pro的安装'}">下一篇</span>
+      <a rel="next" class="extend next" href="/2020/10/20/Kali%E7%9A%84%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">
+        <span class="mdui-p-x-3" mdui-tooltip="{content: 'Kali的详细安装过程'}">下一篇</span>
         <button aria-label="next" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_forward</i></button>
       </a>
     
