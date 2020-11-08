@@ -20,7 +20,7 @@
 <meta property="og:description" content="这是一个bandit靶场的WriteupBandit 0emm其实在这个页面下面给了两个链接，其中一个是介绍ssh如何使用的 but。。。Xshell的指令和wikihow里给的教程有点不大一样 就因为这个，我最开始的时候就用指令 1$ ssh -p 2220 bandit0@bandit.labs.overthewire.org  试了N多遍。。。每次它都会给我驳回登录请求。。。 然后我仔细一看">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-11-01T12:14:36.000Z">
-<meta property="article:modified_time" content="2020-11-01T12:54:01.126Z">
+<meta property="article:modified_time" content="2020-11-08T12:51:21.466Z">
 <meta property="article:author" content="Christopher Li">
 <meta name="twitter:card" content="summary">
 
@@ -245,6 +245,17 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat spaces\ in\ this\ filenames</span><br></pre></td></tr></table></figure>
 
+<h2 id="Bandit-3-→-Bandit4"><a href="#Bandit-3-→-Bandit4" class="headerlink" title="Bandit 3 → Bandit4"></a>Bandit 3 → Bandit4</h2><p>因为我平常用ls指令的时候有一个好习惯就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -lha</span><br></pre></td></tr></table></figure>
+
+<p>反正全输入就完事了</p>
+<p>所以这一关异常简单</p>
+<p>只要进那个<code>inhere</code>文件夹，打开里面的<code>.hiden</code>文件，就完事了。</p>
+<h2 id="Bandit-4-→-Bandit-5"><a href="#Bandit-4-→-Bandit-5" class="headerlink" title="Bandit 4 → Bandit 5"></a>Bandit 4 → Bandit 5</h2><p>​        这一关就贼恶心，你打开inhere文件夹之后你就会发现，有九个一模一样的文件在等着你，然后每个文件前面都是带<code>-</code>号的，所以你打开每一个文件的时候都要输入完整目录。</p>
+<h2 id="Bandit-5-→-Bandit-6"><a href="#Bandit-5-→-Bandit-6" class="headerlink" title="Bandit 5 → Bandit 6"></a>Bandit 5 → Bandit 6</h2><ul>
+<li>这一关更加恶心，inhere里面有几十个文件夹，每个文件夹里面又有好几个文件，如果你要挨个打开看的话能累死，而且这道题还给出了限定条件，就是在提示我们要用 <code>find</code> 指令来做</li>
+<li>别问，问就是恶补了好久的find指令用法。。。</li>
+</ul>
 
       
       <blockquote>
