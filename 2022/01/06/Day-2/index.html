@@ -45,7 +45,7 @@
         content="2022-01-06">
       <meta 
         property="og:article:modified_time" 
-        content="2022-01-06">
+        content="2022-01-07">
       <meta 
         property="og:article:author" 
         content="苍山以北">
@@ -274,7 +274,7 @@
     
     
       <span class="dot"></span>
-      <span>366 字</span>
+      <span>379 字</span>
     
   </div>
   
@@ -283,15 +283,16 @@
     id="section" 
     class="post-content">
     <h1 id="Python-知识（接昨日）"><a href="#Python-知识（接昨日）" class="headerlink" title="Python 知识（接昨日）"></a>Python 知识（接昨日）</h1><h2 id="JSON序列化与反序列化"><a href="#JSON序列化与反序列化" class="headerlink" title="JSON序列化与反序列化"></a>JSON序列化与反序列化</h2><ul>
-<li><p>需加载模块<code>json</code></p>
-</li>
-<li><p>序列化即将Python里的数据结构转化为JSON字符，例如：</p>
-<ul>
-<li>```python<br>import json<br>data = [{‘b’ : 2, ‘d’: 4, ‘a’: 1, ‘c’: 3}]<br>json_format = json.dumps(data, sort_keys = True, indent = 4, separators(‘,’, ‘: ‘))<br>print(json_format)<pre class="highlight"><span class="line"></span><br><span class="line">- 上述代码输出为：</span><br><span class="line"></span><br><span class="line">- ```json</span><br><span class="line">  [</span><br><span class="line">  	  &#123;</span><br><span class="line">        &quot;a&quot;: 1,</span><br><span class="line">        &quot;b&quot;: 2,</span><br><span class="line">        &quot;c&quot;: 3,</span><br><span class="line">        &quot;d&quot;: 4</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br></pre></li>
+<li>需加载模块<code>json</code></li>
+<li>序列化即将Python里的数据结构转化为JSON字符，例如：</li>
 </ul>
-</li>
-<li><p>反序列化即将上述过程逆过来。</p>
-</li>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> json</span><br><span class="line">data = [&#123;<span class="string">&#x27;b&#x27;</span> : <span class="number">2</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>&#125;]</span><br><span class="line">json_format = json.dumps(data, sort_keys = <span class="literal">True</span>, indent = <span class="number">4</span>, separators(<span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;: &#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(json_format)</span><br></pre>
+
+<p>上述代码输出为：</p>
+<pre class="highlight"><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;a&quot;</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="string">&quot;b&quot;</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="string">&quot;c&quot;</span>: <span class="number">3</span>,</span><br><span class="line">        <span class="string">&quot;d&quot;</span>: <span class="number">4</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre>
+
+<ul>
+<li>反序列化即将上述过程逆过来。</li>
 </ul>
 <h2 id="Python异常处理"><a href="#Python异常处理" class="headerlink" title="Python异常处理"></a>Python异常处理</h2><pre class="highlight"><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment">#总是运行这里的代码</span></span><br><span class="line"><span class="keyword">except</span> Error:</span><br><span class="line">    <span class="comment">#出现指定错误运行这里</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment">#没出现指定错误运行这里</span></span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="comment">#不管出没出现都会运行这里</span></span><br></pre>
 
