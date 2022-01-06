@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="Hexo">
+  <link 
+    rel="icon" 
+    href="https://demo.theme-kaze.top/img/Kaze.png">
+  <title>Windows系统中Hexo+GitHub博客的搭建过程</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="Windows系统中Hexo+GitHub博客的搭建过程">
+    
+    
+      <meta 
+        property="og:url" 
+        content="http://example.com/2022/01/05/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/index.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="https://demo.theme-kaze.top/img/Kaze.png">
+    
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2022-01-05">
+      <meta 
+        property="og:article:modified_time" 
+        content="2022-01-05">
+      <meta 
+        property="og:article:author" 
+        content="苍山以北">
+      
+        
+      
+    
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="https://demo.theme-kaze.top/img/Kaze.png" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">苍山以北的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          首页
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          归档
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          标签
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          分类
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          关于
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          友链
+        
+      </a>
+    
+    <a 
+      class="navbar-menu-item darknavbar" 
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </a>
+    <a 
+      class="navbar-menu-item searchnavbar" 
+      id="search">
+      <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i>
+    </a>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Windows系统中Hexo+GitHub博客的搭建过程
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-01-05T15:17:07.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2022-01-05</span>
+    </time>
+    
+    
+      <span class="dot"></span>
+      <span>540 字</span>
+    
+  </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <h2 id="一-首先需要安装两个程序"><a href="#一-首先需要安装两个程序" class="headerlink" title="一.首先需要安装两个程序"></a>一.首先需要安装两个程序</h2><ul>
+<li>node.js：<a target="_blank" rel="noopener" href="http://nodejs.cn/download">http://nodejs.cn/download</a></li>
+<li>Git：<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">http://nodejs.cn/download/</a></li>
+<li><strong>这里有一个可以用来确定软件/模块是否正确安装的方法，就是输入一下获取版本号的指令,比如 <code> npm -v</code> 或者 <code>node -v</code>等。</strong>*</li>
+</ul>
+<h2 id="二-然后就是关于cnpm的配置"><a href="#二-然后就是关于cnpm的配置" class="headerlink" title="二. 然后就是关于cnpm的配置"></a>二. 然后就是关于cnpm的配置</h2><ul>
+<li>大概就是因为npm贼慢贼卡，所以要配置一个叫做cnpm的东西，还要和淘宝链接，具体为啥是淘宝我也不知道，能用就行。</li>
+</ul>
+<pre class="highlight"><span class="line">npm install -g cnpm --registry=http://registry.npm.taobao.org</span><br></pre>
+
+<h2 id="三-安装Hexo"><a href="#三-安装Hexo" class="headerlink" title="三.安装Hexo"></a>三.安装Hexo</h2><pre class="highlight"><span class="line">cnpm install hexo-cli -g</span><br></pre>
+
+<h2 id="四-初始化一个博客"><a href="#四-初始化一个博客" class="headerlink" title="四.初始化一个博客"></a>四.初始化一个博客</h2><pre class="highlight"><span class="line">hexo init blog//在名为blog的文件夹中初始化hexo博客，如果blog文件夹存在且不为空，则会报错</span><br><span class="line">hexo s//启动本地服务器，一般用于预览博客效果，打开浏览器输入localhost:4000即可查看，启动之后可以按Ctrl+C来终止</span><br></pre>
+
+<h2 id="五-创建一篇新博客"><a href="#五-创建一篇新博客" class="headerlink" title="五.创建一篇新博客"></a>五.创建一篇新博客</h2><ul>
+<li>方法一：将一篇已经写好的 <code>.md</code>文件放到 <code>blog\source\_post</code>目录下。</li>
+<li>方法二：运行指令 <code>hexo n &quot;&quot;</code>，其中文件名也就是博客的标题写在引号中间，该指令会在 <code>blog\source\_post</code>目录下创建一个 <code>.md</code>文件，然后编辑这个文件就可以了。</li>
+</ul>
+<h2 id="六-静态文件的清理与生成"><a href="#六-静态文件的清理与生成" class="headerlink" title="六.静态文件的清理与生成"></a>六.静态文件的清理与生成</h2><ul>
+<li><p>每次对博客进行开动之后都要先清理再生成一遍静态文件，这个操作就好比是我们平常编辑一个文档之后要保存一样。</p>
+<pre class="highlight"><span class="line">hexo clean//清理静态文件</span><br><span class="line">hexo g//生成静态文件</span><br></pre></li>
+</ul>
+<h2 id="七-将博客部署到GitHub上"><a href="#七-将博客部署到GitHub上" class="headerlink" title="七.将博客部署到GitHub上"></a>七.将博客部署到GitHub上</h2><ol>
+<li><p>注册一个GitHub账号</p>
+</li>
+<li><p>新建一个仓库，名称一定要是 <code>你的用户名.github.io</code></p>
+</li>
+<li><p>回到cmd，安装插件 <code>cnpm install --save hexo-deployer-git</code></p>
+</li>
+<li><p>编辑blog目录下的 <code>_config.yml</code>:</p>
+<ol>
+<li>拉到文件最底下，找到这样一块，并按照下面的格式填写，注意冒号后面都有空格。</li>
+</ol>
+<pre class="highlight"><span class="line">deploy:</span><br><span class="line">type: &#x27;git&#x27;</span><br><span class="line">repo: https://github.com/你的用户名/你的用户名.github.io.git</span><br><span class="line">branch: master</span><br></pre></li>
+<li><p>回到cmd，输入部署指令 <code>hexo d</code>然后按照提示输入GitHub的账号密码什么的就行了。</p>
+</li>
+</ol>
+
+  </div>
+  <div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+    <div class="nav-item-prev">
+      <a 
+        href="/2022/01/06/day1/" 
+        class="nav-link">
+        <i class="iconfont icon-left nav-prev-icon"></i>
+        <div>
+          <div class="nav-label">上一篇</div>
+          
+            <div class="nav-title">day1 </div>
+          
+        </div>
+      </a>
+    </div>
+  
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E9%A6%96%E5%85%88%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F"><span class="toc-text">一.首先需要安装两个程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%84%B6%E5%90%8E%E5%B0%B1%E6%98%AF%E5%85%B3%E4%BA%8Ecnpm%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">二. 然后就是关于cnpm的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%AE%89%E8%A3%85Hexo"><span class="toc-text">三.安装Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2"><span class="toc-text">四.初始化一个博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E5%88%9B%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%B0%E5%8D%9A%E5%AE%A2"><span class="toc-text">五.创建一篇新博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E7%9A%84%E6%B8%85%E7%90%86%E4%B8%8E%E7%94%9F%E6%88%90"><span class="toc-text">六.静态文件的清理与生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E5%B0%86%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0GitHub%E4%B8%8A"><span class="toc-text">七.将博客部署到GitHub上</span></a></li></ol>
+</div></main>
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="https://demo.theme-kaze.top/img/Kaze.png" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">苍山以北</p>
+<p class="author-description">重建了。。。累死了</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>3</span>
+    <span>文章</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>0</span>
+    <span>分类</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>0</span>
+    <span>标签</span>
+  </a>
+</div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E9%A6%96%E5%85%88%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F"><span class="toc-text">一.首先需要安装两个程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%84%B6%E5%90%8E%E5%B0%B1%E6%98%AF%E5%85%B3%E4%BA%8Ecnpm%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">二. 然后就是关于cnpm的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%AE%89%E8%A3%85Hexo"><span class="toc-text">三.安装Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2"><span class="toc-text">四.初始化一个博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E5%88%9B%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%B0%E5%8D%9A%E5%AE%A2"><span class="toc-text">五.创建一篇新博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E7%9A%84%E6%B8%85%E7%90%86%E4%B8%8E%E7%94%9F%E6%88%90"><span class="toc-text">六.静态文件的清理与生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E5%B0%86%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0GitHub%E4%B8%8A"><span class="toc-text">七.将博客部署到GitHub上</span></a></li></ol>
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>分类
+  </div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>热门标签
+  </div>
+  <div class="tags-list">
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E9%A6%96%E5%85%88%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F"><span class="toc-text">一.首先需要安装两个程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%84%B6%E5%90%8E%E5%B0%B1%E6%98%AF%E5%85%B3%E4%BA%8Ecnpm%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">二. 然后就是关于cnpm的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%AE%89%E8%A3%85Hexo"><span class="toc-text">三.安装Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2"><span class="toc-text">四.初始化一个博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E5%88%9B%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%B0%E5%8D%9A%E5%AE%A2"><span class="toc-text">五.创建一篇新博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E7%9A%84%E6%B8%85%E7%90%86%E4%B8%8E%E7%94%9F%E6%88%90"><span class="toc-text">六.静态文件的清理与生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E5%B0%86%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0GitHub%E4%B8%8A"><span class="toc-text">七.将博客部署到GitHub上</span></a></li></ol>
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>最近文章
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-01-06</div>
+        <a href="/2022/01/06/hello-world/"><div class="recent-posts-item-content">Hello World</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-01-06</div>
+        <a href="/2022/01/06/day1/"><div class="recent-posts-item-content">day1</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-01-05</div>
+        <a href="/2022/01/05/Windows%E7%B3%BB%E7%BB%9F%E4%B8%ADHexo-GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/"><div class="recent-posts-item-content">Windows系统中Hexo+GitHub博客的搭建过程</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+            2020 -
+          
+          2022
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          苍山以北的博客
+        </a>
+      </div>
+    </div>
+
+    
+      <div class="footer-dsc">
+        
+          Powered by
+          <a 
+            href="https://hexo.io/" 
+            class="footer-link" 
+            target="_blank" 
+            rel="nofollow noopener noreferrer">
+            &nbsp;Hexo
+          </a>
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          Theme -
+          <a 
+            href="https://github.com/theme-kaze" 
+            class="footer-link" 
+            target="_blank"
+            rel="nofollow noopener noreferrer">
+            &nbsp;Kaze
+          </a>
+        
+      </div>
+    
+    
+    
+    
+</footer> 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+     
+    
+    
+  </body>
+</html>
