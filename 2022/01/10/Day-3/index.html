@@ -274,7 +274,7 @@
     
     
       <span class="dot"></span>
-      <span>995 字</span>
+      <span>998 字</span>
     
   </div>
   
@@ -326,7 +326,7 @@
 <pre class="highlight"><span class="line">numpy.<span class="built_in">sum</span>(arr, axis = <span class="number">1</span>) <span class="comment"># axis=1,每一行求和 axie=0,每一列求和</span></span><br><span class="line">numpy.<span class="built_in">max</span>() <span class="comment"># 最大值</span></span><br><span class="line">numpy.argmax() <span class="comment"># 最大值下标</span></span><br><span class="line"><span class="comment"># min同上</span></span><br><span class="line">numpy.mean() <span class="comment"># 均值</span></span><br></pre>
 
 <h4 id="数组索引与切片"><a href="#数组索引与切片" class="headerlink" title="数组索引与切片"></a>数组索引与切片</h4><ul>
-<li>基本切片语法是 <code>i:j:k</code>，其中 <em>i</em> 是起始索引，<em>j</em> 是停止索引，<em>k</em> 是步骤（<img src="https://www.numpy.org.cn/static/images/math/3bf28764fb6d6c43a60af989993514e85c51a308.svg" alt="k\neq0" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://www.numpy.org.cn/static/images/math/3bf28764fb6d6c43a60af989993514e85c51a308.svg" class="lozad post-image">)。</li>
+<li>基本切片语法是 <code>i:j:k</code>，其中 <em>i</em> 是起始索引，<em>j</em> 是停止索引，<em>k</em> 是步骤（k不为0）</li>
 </ul>
 <h2 id="Pandas库"><a href="#Pandas库" class="headerlink" title="Pandas库"></a>Pandas库</h2><ul>
 <li>基于NumPy实现</li>
@@ -370,7 +370,7 @@
 </ul>
 <h2 id="PIL库"><a href="#PIL库" class="headerlink" title="PIL库"></a>PIL库</h2><ul>
 <li><code>image</code>是PIL库中的一个图像的类</li>
-<li>使用前需先安装pillow；<!----></li>
+<li>使用前需先安装pillow；</li>
 </ul>
 <h3 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h3><ul>
 <li>读取图片：<code>img.open()</code></li>
@@ -396,6 +396,20 @@
   </div>
 </article>
 <div class="nav">
+  
+    <div class="nav-item-prev">
+      <a 
+        href="/2022/01/10/Day-4/" 
+        class="nav-link">
+        <i class="iconfont icon-left nav-prev-icon"></i>
+        <div>
+          <div class="nav-label">上一篇</div>
+          
+            <div class="nav-title">Day 4 </div>
+          
+        </div>
+      </a>
+    </div>
   
   
     <div class="nav-item-next">
@@ -442,7 +456,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>5</span>
+    <span>6</span>
     <span>文章</span>
   </a>
   <a 
@@ -534,6 +548,11 @@
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-01-10</div>
+        <a href="/2022/01/10/Day-4/"><div class="recent-posts-item-content">Day 4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-01-10</div>
         <a href="/2022/01/10/Day-3/"><div class="recent-posts-item-content">Day 3 - 深度学习常用库</div></a>
       </div>
     
@@ -545,11 +564,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-01-06</div>
         <a href="/2022/01/06/hello-world/"><div class="recent-posts-item-content">Hello World</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-01-06</div>
-        <a href="/2022/01/06/day1/"><div class="recent-posts-item-content">day1</div></a>
       </div>
     
   </div>
