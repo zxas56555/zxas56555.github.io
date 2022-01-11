@@ -18,12 +18,12 @@
   <link 
     rel="icon" 
     href="https://demo.theme-kaze.top/img/Kaze.png">
-  <title>Day 4</title>
+  <title>Day 4 - PaddleHub体验与应用</title>
   
     
       <meta 
         property="og:title" 
-        content="Day 4">
+        content="Day 4 - PaddleHub体验与应用">
     
     
       <meta 
@@ -45,7 +45,7 @@
         content="2022-01-10">
       <meta 
         property="og:article:modified_time" 
-        content="2022-01-10">
+        content="2022-01-11">
       <meta 
         property="og:article:author" 
         content="苍山以北">
@@ -260,7 +260,7 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      Day 4
+      Day 4 - PaddleHub体验与应用
     </h1>
   </header>
   <div class="post-meta post-show-meta">
@@ -274,7 +274,7 @@
     
     
       <span class="dot"></span>
-      <span>6 字</span>
+      <span>703 字</span>
     
   </div>
   
@@ -282,7 +282,70 @@
   <div 
     id="section" 
     class="post-content">
-    <h1 id="PaddleHub体验与应用"><a href="#PaddleHub体验与应用" class="headerlink" title="PaddleHub体验与应用"></a>PaddleHub体验与应用</h1>
+    <h1 id="PaddleHub体验与应用"><a href="#PaddleHub体验与应用" class="headerlink" title="PaddleHub体验与应用"></a>PaddleHub体验与应用</h1><ul>
+<li>深度学习的基本流程：</li>
+</ul>
+<p><img src="/images/4.1.png" alt="img" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/images/4.1.png" class="lozad post-image"></p>
+<h2 id="通用模型直接预测"><a href="#通用模型直接预测" class="headerlink" title="通用模型直接预测"></a>通用模型直接预测</h2><ol>
+<li>去百度AI Studio官网上查找已有的模型（以情感分析为例）</li>
+<li>使用模型。<ul>
+<li>Linux命令行：<ol>
+<li>安装模型：<code>!hub install senta_lstm==1.1.0</code></li>
+<li>调用模型：<code>!hub run senta_lstm --input_text &quot;人工智能课程很有趣&quot;</code></li>
+</ol>
+</li>
+<li>Python：<ol>
+<li>引入：<code>import paddlehub ashub</code></li>
+<li>定义：<code>senta = hub.Module(name=“senta_bilstm”, version=“1.0.0”)</code></li>
+<li>调用：<code>res = senta.sentiment_classify(texts=[“味道不错，确实不算太辣，适合不能吃辣的人。就在长江边上，抬头就能看到长江的风景。鸭肠、黄鳝都比较新鲜。”])</code></li>
+<li>输出：<code>print(res)</code></li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="非通用模型选取类似模型进行迁移学习"><a href="#非通用模型选取类似模型进行迁移学习" class="headerlink" title="非通用模型选取类似模型进行迁移学习"></a>非通用模型选取类似模型进行迁移学习</h2><ol>
+<li>安装paddlehup</li>
+</ol>
+<pre class="highlight"><span class="line">!pip install paddlehub==1.6.0 -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre>
+
+<ol start="2">
+<li>导入python包：<code>import paddlehub as hub</code></li>
+<li>对数据进行分类，一般是按照8:1:1的比例将数据集分为训练集、验证集、测试集</li>
+</ol>
+<pre class="highlight"><span class="line"><span class="keyword">from</span> paddlehub.dataset.base_cv_dataset <span class="keyword">import</span> BaseCVDataset</span><br><span class="line">   </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DemoDataset</span>(<span class="params">BaseCVDataset</span>):</span>	</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span>	</span><br><span class="line">       <span class="comment"># 数据集存放位置</span></span><br><span class="line">       </span><br><span class="line">       self.dataset_dir = <span class="string">&quot;data&quot;</span></span><br><span class="line">       <span class="built_in">super</span>(DemoDataset, self).__init__(</span><br><span class="line">           base_path=self.dataset_dir,</span><br><span class="line">           train_list_file=<span class="string">&quot;train_list.txt&quot;</span>,</span><br><span class="line">           validate_list_file=<span class="string">&quot;validate_list.txt&quot;</span>,</span><br><span class="line">           test_list_file=<span class="string">&quot;test_list.txt&quot;</span>,</span><br><span class="line">           <span class="comment">#predict_file=&quot;predict_list.txt&quot;,</span></span><br><span class="line">           label_list_file=<span class="string">&quot;label_list.txt&quot;</span>,</span><br><span class="line">           )</span><br><span class="line">dataset = DemoDataset()</span><br></pre>
+
+<ol start="4">
+<li>生成数据读取器，也就是将数据集变成模型要求的格式，具体格式参考模型文档</li>
+<li>配置策略<ul>
+<li><code>use_cuda</code>：设置为False表示使用CPU进行训练。如果您本机支持GPU，且安装的是GPU版本的PaddlePaddle，我们建议您将这个选项设置为True；</li>
+<li><code>epoch</code>：迭代轮数；</li>
+<li><code>batch_size</code>：每次训练的时候，给模型输入的每批数据大小为32，模型训练时能够并行处理批数据，因此batch_size越大，训练的效率越高，但是同时带来了内存的负荷，过大的batch_size可能导致内存不足而无法训练，因此选择一个合适的batch_size是很重要的一步；</li>
+<li><code>log_interval</code>：每隔10 step打印一次训练日志；</li>
+<li><code>eval_interval</code>：每隔50 step在验证集上进行一次性能评估；</li>
+<li><code>checkpoint_dir</code>：将训练的参数和数据保存到cv_finetune_turtorial_demo目录中；</li>
+<li><code>strategy</code>：使用DefaultFinetuneStrategy策略进行finetune，</li>
+<li>更多策略和详见[GitHub - PaddleHub](<a target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleHub">GitHub - PaddlePaddle/PaddleHub: Awesome pre-trained models toolkit based on PaddlePaddle.(300+ models including Image, Text, Audio and Video with Easy Inference &amp; Serving deployment)</a>)</li>
+</ul>
+</li>
+</ol>
+<pre class="highlight"><span class="line">config = hub.RunConfig(</span><br><span class="line">    use_cuda = ,                              <span class="comment">#是否使用GPU训练，默认为False；</span></span><br><span class="line">    num_epoch = ,                                <span class="comment">#Fine-tune的轮数；</span></span><br><span class="line">    checkpoint_dir=<span class="string">&quot;&quot;</span>,                          <span class="comment">#模型checkpoint保存路径, 若用户没有指定，程序会自动生成；</span></span><br><span class="line">    batch_size = ,                              <span class="comment">#训练的批大小，如果使用GPU，请根据实际情况调整batch_size；</span></span><br><span class="line">    eval_interval = ,                           <span class="comment">#模型评估的间隔，默认每100个step评估一次验证集；</span></span><br><span class="line">    strategy = hub.finetune.strategy.DefaultFinetuneStrategy())  <span class="comment">#Fine-tune优化策略；</span></span><br></pre>
+
+<ol start="6">
+<li>组建FineTune Task<ul>
+<li>参考模型的文档</li>
+</ul>
+</li>
+<li>开始FineTune Task<ul>
+<li>调用模型接口（参考模型文档），即：<code>run_states = task.xxxxx()</code></li>
+</ul>
+</li>
+<li>模型预测<ul>
+<li>具体方法参考<a href="##%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B">通用模型直接预测</a></li>
+</ul>
+</li>
+</ol>
+
   </div>
   <div>
     
@@ -316,7 +379,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PaddleHub%E4%BD%93%E9%AA%8C%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-text">PaddleHub体验与应用</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PaddleHub%E4%BD%93%E9%AA%8C%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-text">PaddleHub体验与应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B"><span class="toc-text">通用模型直接预测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B%E9%80%89%E5%8F%96%E7%B1%BB%E4%BC%BC%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="toc-text">非通用模型选取类似模型进行迁移学习</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -364,7 +427,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PaddleHub%E4%BD%93%E9%AA%8C%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-text">PaddleHub体验与应用</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PaddleHub%E4%BD%93%E9%AA%8C%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-text">PaddleHub体验与应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B"><span class="toc-text">通用模型直接预测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B%E9%80%89%E5%8F%96%E7%B1%BB%E4%BC%BC%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="toc-text">非通用模型选取类似模型进行迁移学习</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -411,7 +474,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PaddleHub%E4%BD%93%E9%AA%8C%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-text">PaddleHub体验与应用</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PaddleHub%E4%BD%93%E9%AA%8C%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-text">PaddleHub体验与应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B"><span class="toc-text">通用模型直接预测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B%E9%80%89%E5%8F%96%E7%B1%BB%E4%BC%BC%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="toc-text">非通用模型选取类似模型进行迁移学习</span></a></li></ol></li></ol>
     </article>
   
   
@@ -427,7 +490,7 @@
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-01-10</div>
-        <a href="/2022/01/10/Day-4/"><div class="recent-posts-item-content">Day 4</div></a>
+        <a href="/2022/01/10/Day-4/"><div class="recent-posts-item-content">Day 4 - PaddleHub体验与应用</div></a>
       </div>
     
       <div class="recent-posts-item">
