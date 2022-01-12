@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="Hexo">
+  <link 
+    rel="icon" 
+    href="https://demo.theme-kaze.top/img/Kaze.png">
+  <title>初识MNIST</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="初识MNIST">
+    
+    
+      <meta 
+        property="og:url" 
+        content="http://example.com/2022/01/12/%E5%88%9D%E8%AF%86MNIST/index.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="https://demo.theme-kaze.top/img/Kaze.png">
+    
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2022-01-12">
+      <meta 
+        property="og:article:modified_time" 
+        content="2022-01-12">
+      <meta 
+        property="og:article:author" 
+        content="苍山以北">
+      
+        
+      
+    
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="https://demo.theme-kaze.top/img/Kaze.png" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">苍山以北的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          首页
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          归档
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          标签
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          分类
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          关于
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          友链
+        
+      </a>
+    
+    <a 
+      class="navbar-menu-item darknavbar" 
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </a>
+    <a 
+      class="navbar-menu-item searchnavbar" 
+      id="search">
+      <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i>
+    </a>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      初识MNIST
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-01-12T15:12:14.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2022-01-12</span>
+    </time>
+    
+    
+      <span class="dot"></span>
+      <span>1.8k 字</span>
+    
+  </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <h1 id="MNIST"><a href="#MNIST" class="headerlink" title="MNIST"></a>MNIST</h1><h2 id="关于MNIST"><a href="#关于MNIST" class="headerlink" title="关于MNIST"></a>关于MNIST</h2><ul>
+<li>将手写数字的灰度图像（28 像素×28 像素）划分到 10 个类别 中（0~9）。</li>
+<li>是机器学习领域的一个经典数据集，其历史几乎和这 个领域一样长，而且已被人们深入研究。这个数据集包含 60 000 张训练图像和 10 000 张测试图 像，由美国国家标准与技术研究院（National Institute of Standards and Technology，即 MNIST 中 的 NIST）在 20 世纪 80 年代收集得到。</li>
+</ul>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><ul>
+<li>以下内容摘自<a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/projectdetail/3403460">飞桨</a>。目前配置网络还没有搞明白，先摘录下来，备日后研究。</li>
+</ul>
+<h3 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h3><ul>
+<li>导入需要的包</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> paddle <span class="keyword">as</span> paddle</span><br><span class="line"><span class="keyword">import</span> paddle.fluid <span class="keyword">as</span> fluid</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> os</span><br></pre>
+
+<ul>
+<li>定义读取MNIST数据集的train_reader和test_reader，指定一个Batch的大小为128，也就是一次训练或验证128张图像。 </li>
+</ul>
+<blockquote>
+<p><code>paddle.dataset.mnist.train()</code>和<code>test()</code>接口是mnist用到的预处理</p>
+</blockquote>
+<pre class="highlight"><span class="line">train_reader = paddle.batch(paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=<span class="number">512</span>),batch_size=<span class="number">128</span>)</span><br><span class="line">test_reader = paddle.batch(paddle.dataset.mnist.test(), batch_size=<span class="number">128</span>)</span><br></pre>
+
+<h3 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h3><ul>
+<li>以下的代码判断就是定义一个简单的多层感知器，一共有三层，两个大小为100的隐层和一个大小为10的输出层，因为MNIST数据集是手写0到9的灰度图像，类别有10个，所以最后的输出大小是10。最后输出层的激活函数是Softmax，所以最后的输出层相当于一个分类器。加上一个输入层的话，多层感知器的结构是：输入层–&gt;&gt;隐层–&gt;&gt;隐层–&gt;&gt;输出层。</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment"># 定义多层感知器</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multilayer_perceptron</span>(<span class="params"><span class="built_in">input</span></span>):</span></span><br><span class="line">    <span class="comment"># 第一个全连接层，激活函数为ReLU</span></span><br><span class="line">    hidden1 = fluid.layers.fc(<span class="built_in">input</span>=<span class="built_in">input</span>, size=<span class="number">100</span>, act=<span class="string">&#x27;relu&#x27;</span>)</span><br><span class="line">    <span class="comment"># 第二个全连接层，激活函数为ReLU</span></span><br><span class="line">    hidden2 = fluid.layers.fc(<span class="built_in">input</span>=hidden1, size=<span class="number">100</span>, act=<span class="string">&#x27;relu&#x27;</span>)</span><br><span class="line">    <span class="comment"># 以softmax为激活函数的全连接输出层，大小为10</span></span><br><span class="line">    prediction = fluid.layers.fc(<span class="built_in">input</span>=hidden2, size=<span class="number">10</span>, act=<span class="string">&#x27;softmax&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> prediction</span><br></pre>
+
+<ul>
+<li>定义输入层，输入的是图像数据。图像是2828的灰度图，所以输入的形状是[1, 28, 28]，如果图像是3232的彩色图，那么输入的形状是[3. 32, 32]，因为灰度图只有一个通道，而彩色图有RGB三个通道。</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment"># 定义输入输出层</span></span><br><span class="line">image = fluid.layers.data(name=<span class="string">&#x27;image&#x27;</span>, shape=[<span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>], dtype=<span class="string">&#x27;float32&#x27;</span>)  <span class="comment">#单通道，28*28像素值</span></span><br><span class="line">label = fluid.layers.data(name=<span class="string">&#x27;label&#x27;</span>, shape=[<span class="number">1</span>], dtype=<span class="string">&#x27;int64&#x27;</span>)            <span class="comment">#图片标签</span></span><br></pre>
+
+<ul>
+<li>在这里调用定义好的网络来获取分类器</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment"># 获取分类器</span></span><br><span class="line">model = multilayer_perceptron(image)</span><br></pre>
+
+<ul>
+<li>接着是定义损失函数，这次使用的是交叉熵损失函数，该函数在分类任务上比较常用。定义了一个损失函数之后，还有对它求平均值，因为定义的是一个Batch的损失值。同时我们还可以定义一个准确率函数，这个可以在我们训练的时候输出分类的准确率。</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment"># 获取损失函数和准确率函数</span></span><br><span class="line">cost = fluid.layers.cross_entropy(<span class="built_in">input</span>=model, label=label)  <span class="comment">#使用交叉熵损失函数,描述真实样本标签和预测概率之间的差值</span></span><br><span class="line">avg_cost = fluid.layers.mean(cost)</span><br><span class="line">acc = fluid.layers.accuracy(<span class="built_in">input</span>=model, label=label)</span><br></pre>
+
+<ul>
+<li>接着是定义优化方法，这次我们使用的是Adam优化方法，同时指定学习率为0.001。</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment"># 定义优化方法</span></span><br><span class="line">optimizer = fluid.optimizer.AdamOptimizer(learning_rate=<span class="number">0.001</span>)   <span class="comment">#使用Adam算法进行优化</span></span><br><span class="line">opts = optimizer.minimize(avg_cost)</span><br></pre>
+
+<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><ul>
+<li>定义一个解析器和初始化参数</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment"># 定义一个使用CPU的解析器</span></span><br><span class="line">place = fluid.CPUPlace()</span><br><span class="line">exe = fluid.Executor(place)</span><br><span class="line"><span class="comment"># 进行参数初始化</span></span><br><span class="line">exe.run(fluid.default_startup_program())</span><br></pre>
+
+<ul>
+<li>输入的数据维度是图像数据和图像对应的标签，每个类别的图像都要对应一个标签，这个标签是从0递增的整型数值。</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment"># 定义输入数据维度</span></span><br><span class="line">feeder = fluid.DataFeeder(place=place, feed_list=[image, label])</span><br></pre>
+
+<ul>
+<li>最后就可以开始训练了，我们这次训练5个Pass。在上面我们已经定义了一个求准确率的函数，所以我们在训练的时候让它输出当前的准确率，计算准确率的原理很简单，就是把训练是预测的结果和真实的值比较，求出准确率。每一个Pass训练结束之后，再进行一次测试，使用测试集进行测试，并求出当前的Cost和准确率的平均值。</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment"># 开始训练和测试</span></span><br><span class="line"><span class="keyword">for</span> pass_id <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    <span class="comment"># 进行训练</span></span><br><span class="line">    <span class="keyword">for</span> batch_id, data <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_reader()):                        <span class="comment">#遍历train_reader</span></span><br><span class="line">        train_cost, train_acc = exe.run(program=fluid.default_main_program(),<span class="comment">#运行主程序</span></span><br><span class="line">                                        feed=feeder.feed(data),             <span class="comment">#给模型喂入数据</span></span><br><span class="line">                                        fetch_list=[avg_cost, acc])         <span class="comment">#fetch 误差、准确率</span></span><br><span class="line">        <span class="comment"># 每100个batch打印一次信息  误差、准确率</span></span><br><span class="line">        <span class="keyword">if</span> batch_id % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;Pass:%d, Batch:%d, Cost:%0.5f, Accuracy:%0.5f&#x27;</span> %</span><br><span class="line">                  (pass_id, batch_id, train_cost[<span class="number">0</span>], train_acc[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行测试</span></span><br><span class="line">    test_accs = []</span><br><span class="line">    test_costs = []</span><br><span class="line">    <span class="comment">#每训练一轮 进行一次测试</span></span><br><span class="line">    <span class="keyword">for</span> batch_id, data <span class="keyword">in</span> <span class="built_in">enumerate</span>(test_reader()):                         <span class="comment">#遍历test_reader</span></span><br><span class="line">        test_cost, test_acc = exe.run(program=fluid.default_main_program(), <span class="comment">#执行训练程序</span></span><br><span class="line">                                      feed=feeder.feed(data),               <span class="comment">#喂入数据</span></span><br><span class="line">                                      fetch_list=[avg_cost, acc])           <span class="comment">#fetch 误差、准确率</span></span><br><span class="line">        test_accs.append(test_acc[<span class="number">0</span>])                                       <span class="comment">#每个batch的准确率</span></span><br><span class="line">        test_costs.append(test_cost[<span class="number">0</span>])                                     <span class="comment">#每个batch的误差</span></span><br><span class="line">    <span class="comment"># 求测试结果的平均值</span></span><br><span class="line">    test_cost = (<span class="built_in">sum</span>(test_costs) / <span class="built_in">len</span>(test_costs))                         <span class="comment">#每轮的平均误差</span></span><br><span class="line">    test_acc = (<span class="built_in">sum</span>(test_accs) / <span class="built_in">len</span>(test_accs))                            <span class="comment">#每轮的平均准确率</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Test:%d, Cost:%0.5f, Accuracy:%0.5f&#x27;</span> % (pass_id, test_cost, test_acc))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#保存模型</span></span><br><span class="line">    model_save_dir = <span class="string">&quot;/home/aistudio/data/hand.inference.model&quot;</span></span><br><span class="line">    <span class="comment"># 如果保存路径不存在就创建</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(model_save_dir):</span><br><span class="line">        os.makedirs(model_save_dir)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&#x27;save models to %s&#x27;</span> % (model_save_dir))</span><br><span class="line">    fluid.io.save_inference_model(model_save_dir,  <span class="comment">#保存推理model的路径</span></span><br><span class="line">                                  [<span class="string">&#x27;image&#x27;</span>],      <span class="comment">#推理（inference）需要 feed 的数据</span></span><br><span class="line">                                  [model],        <span class="comment">#保存推理（inference）结果的 Variables</span></span><br><span class="line">                                  exe)            <span class="comment">#executor 保存 inference model</span></span><br></pre>
+
+<h3 id="模型预测"><a href="#模型预测" class="headerlink" title="模型预测"></a>模型预测</h3><ul>
+<li>注意在预测之前，要对图像进行预处理，处理方式要跟训练的时候一样。首先进行灰度化，然后压缩图像大小为28*28，接着将图像转换成一维向量，最后再对一维向量进行归一化处理。</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment"># 预处理</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_image</span>(<span class="params">file</span>):</span></span><br><span class="line">    im = Image.<span class="built_in">open</span>(file).convert(<span class="string">&#x27;L&#x27;</span>)                        <span class="comment">#将RGB转化为灰度图像，L代表灰度图像，灰度图像的像素值在0~255之间</span></span><br><span class="line">    im = im.resize((<span class="number">28</span>, <span class="number">28</span>), Image.ANTIALIAS)                 <span class="comment">#resize image with high-quality 图像大小为28*28</span></span><br><span class="line">    im = np.array(im).reshape(<span class="number">1</span>, <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>).astype(np.float32)<span class="comment">#返回新形状的数组,把它变成一个 numpy 数组以匹配数据馈送格式。</span></span><br><span class="line">   <span class="comment"># print(im)</span></span><br><span class="line">    im = im / <span class="number">255.0</span> * <span class="number">2.0</span> - <span class="number">1.0</span>                               <span class="comment">#归一化到【-1~1】之间</span></span><br><span class="line">    <span class="built_in">print</span>(im)</span><br><span class="line">    <span class="keyword">return</span> im</span><br><span class="line"></span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&#x27;data/data27012/6.png&#x27;</span>)</span><br><span class="line">plt.imshow(img)   <span class="comment">#根据数组绘制图像</span></span><br><span class="line">plt.show()        <span class="comment">#显示图像</span></span><br><span class="line">infer_exe = fluid.Executor(place)</span><br><span class="line">inference_scope = fluid.core.Scope()</span><br></pre>
+
+<ul>
+<li>最后把图像转换成一维向量并进行预测，数据从feed中的image传入。fetch_list的值是网络模型的最后一层分类器，所以输出的结果是10个标签的概率值，这些概率值的总和为1。</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment"># 加载数据并开始预测</span></span><br><span class="line"><span class="keyword">with</span> fluid.scope_guard(inference_scope):</span><br><span class="line">    <span class="comment">#获取训练好的模型</span></span><br><span class="line">    <span class="comment">#从指定目录中加载 推理model(inference model)</span></span><br><span class="line">    [inference_program,                                           <span class="comment">#推理Program</span></span><br><span class="line">     feed_target_names,                                           <span class="comment">#是一个str列表，它包含需要在推理 Program 中提供数据的变量的名称。 </span></span><br><span class="line">     fetch_targets] = fluid.io.load_inference_model(model_save_dir,<span class="comment">#fetch_targets：是一个 Variable 列表，从中我们可以得到推断结果。model_save_dir：模型保存的路径</span></span><br><span class="line">                                                    infer_exe)     <span class="comment">#infer_exe: 运行 inference model的 executor</span></span><br><span class="line">    img = load_image(<span class="string">&#x27;data/data27012/6.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    results = exe.run(program=inference_program,     <span class="comment">#运行推测程序</span></span><br><span class="line">                   feed=&#123;feed_target_names[<span class="number">0</span>]: img&#125;, <span class="comment">#喂入要预测的img</span></span><br><span class="line">                   fetch_list=fetch_targets)         <span class="comment">#得到推测结果,    </span></span><br></pre>
+
+
+  </div>
+  <div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/2022/01/10/Day-4/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">Day 4 - PaddleHub体验与应用 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MNIST"><span class="toc-text">MNIST</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EMNIST"><span class="toc-text">关于MNIST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5"><span class="toc-text">实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE"><span class="toc-text">准备数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="toc-text">配置网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-text">模型训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B"><span class="toc-text">模型预测</span></a></li></ol></li></ol></li></ol>
+</div></main>
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="https://demo.theme-kaze.top/img/Kaze.png" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">苍山以北</p>
+<p class="author-description">重建了。。。累死了</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>7</span>
+    <span>文章</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>0</span>
+    <span>分类</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>0</span>
+    <span>标签</span>
+  </a>
+</div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MNIST"><span class="toc-text">MNIST</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EMNIST"><span class="toc-text">关于MNIST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5"><span class="toc-text">实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE"><span class="toc-text">准备数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="toc-text">配置网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-text">模型训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B"><span class="toc-text">模型预测</span></a></li></ol></li></ol></li></ol>
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>分类
+  </div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>热门标签
+  </div>
+  <div class="tags-list">
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MNIST"><span class="toc-text">MNIST</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EMNIST"><span class="toc-text">关于MNIST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5"><span class="toc-text">实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE"><span class="toc-text">准备数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="toc-text">配置网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-text">模型训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B"><span class="toc-text">模型预测</span></a></li></ol></li></ol></li></ol>
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>最近文章
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-01-12</div>
+        <a href="/2022/01/12/%E5%88%9D%E8%AF%86MNIST/"><div class="recent-posts-item-content">初识MNIST</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-01-10</div>
+        <a href="/2022/01/10/Day-4/"><div class="recent-posts-item-content">Day 4 - PaddleHub体验与应用</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-01-10</div>
+        <a href="/2022/01/10/Day-3/"><div class="recent-posts-item-content">Day 3 - 深度学习常用库</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-01-06</div>
+        <a href="/2022/01/06/Day-2/"><div class="recent-posts-item-content">Day 2</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+            2020 -
+          
+          2022
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          苍山以北的博客
+        </a>
+      </div>
+    </div>
+
+    
+      <div class="footer-dsc">
+        
+          Powered by
+          <a 
+            href="https://hexo.io/" 
+            class="footer-link" 
+            target="_blank" 
+            rel="nofollow noopener noreferrer">
+            &nbsp;Hexo
+          </a>
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          Theme -
+          <a 
+            href="https://github.com/theme-kaze" 
+            class="footer-link" 
+            target="_blank"
+            rel="nofollow noopener noreferrer">
+            &nbsp;Kaze
+          </a>
+        
+      </div>
+    
+    
+    
+    
+</footer> 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+     
+    
+    
+  </body>
+</html>
